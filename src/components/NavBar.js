@@ -10,11 +10,15 @@ const NavBar = (props) => {
           <Link to="/">Home</Link>
         </Navbar.Brand>
       </Navbar.Header>
-      <Nav
-        pullRight
-      >
+      <Nav pullRight>
         <NavItem>
-          <Link to="/User">User</Link>
+          <Link to="/plan">Plan your meals</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/create">Create a new Recipe</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/users/1">User</Link>
         </NavItem>
         <NavItem>
           <Link to="/Search">Find a Recipe</Link>

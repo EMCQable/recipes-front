@@ -9,7 +9,7 @@ export default class Search extends Component {
         <div className="lander">
           <h1>Recipes</h1>
           <p>Search for recipes</p>
-          <Link to="/Recipes/1" />
+          <Link to="/Recipes/1">A Recipe</Link>
         </div>
       </div>
     );
