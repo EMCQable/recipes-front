@@ -40,19 +40,17 @@ export default class CreateRecipe extends Component {
       Item: {
         name: this.state.name,
         ingredients:[
-          {[this.state.ingredient1]: "3"},          
-          {[this.state.ingredient2]: "5"},
+          this.state.ingredient1,          
+          this.state.ingredient2,
         ]
       }
     }
 
     console.log(await RecipeService.create(Item))
 
-    /*
     this.setState({ name: ""});
     this.setState({ ingredient1: ""});
     this.setState({ ingredient2: ""});
-    */
   }
 
   renderForm() {

@@ -1,8 +1,13 @@
 import axios from 'axios'
-const baseUrl = 'https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod/recipes/'
+const baseUrl = 'https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod/recipes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+const getRecipe = (id) => {
+  const request = axios.get(`${baseUrl}/${id}`)
   return request.then(response => response.data)
 }
 
@@ -21,4 +26,4 @@ const remove = (id) => {
   return request.then(response => response.data)
 }
 
-export default { getAll, create, update, remove}
+export default { getAll, create, update, remove, getRecipe }
