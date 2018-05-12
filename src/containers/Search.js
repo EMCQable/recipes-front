@@ -1,18 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import "./Home.css";
+import "./Search.css";
 
-export default class Search extends Component {
-  render() {
-    return (
-      <div className="Search">
-        <div className="lander">
-          <h1>Recipes</h1>
-          <p>Search for recipes</p>
-          <Link to="/Recipes/1">A Recipe</Link>
-        </div>
-      </div>
-    );
-  }
+const showRecipes = ({Items}) => {
+  return (
+    <div>
+      <ul>
+        {Items.map(element => {
+          const link = `recipes/${element.id}`;
+          return <li key={element.id} ><Link to={link} > {element.name}</Link></li>
+        })}
+      </ul>
+    </div>
+  )
 }
 
+const Search = (props) => {
+  return (
+    <div className="Search" >
+      <div className="lander">
+        <h1>Recipes</h1>
+        <p>Search for recipes</p>
+        {showRecipes(props)}
+      </div>
+    </div >
+  )
+}
+
+export default Search

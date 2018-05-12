@@ -12,16 +12,16 @@ const NavBar = (props) => {
       </Navbar.Header>
       <Nav pullRight>
         <NavItem>
-          <Link to="/plan">Plan your meals</Link>
-        </NavItem>
-        <NavItem>
           <Link to="/create">Create a new Recipe</Link>
         </NavItem>
         <NavItem>
-          <Link to="/users/1">User</Link>
+          <Link to="/Search">Find a Recipe</Link>
         </NavItem>
         <NavItem>
-          <Link to="/Search">Find a Recipe</Link>
+          <Link to="/plan">Plan your meals</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/users/1">User</Link>
         </NavItem>
       </Nav>
     </Navbar>

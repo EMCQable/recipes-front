@@ -6,8 +6,8 @@ export default class Planner extends Component {
     return (
       <div className="Create">
         <div className="lander">
-          <h1>Creating a new Recipe</h1>
-          <p>Placeholder for forms</p>
+          <h1>Meal planning</h1>
+          <p>Placeholder for calendar</p>
         </div>
       </div>
     );
