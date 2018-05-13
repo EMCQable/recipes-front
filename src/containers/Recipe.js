@@ -8,7 +8,7 @@ export default class Recipe extends Component {
 
 
     this.state = {
-      recipe: null
+      recipe: []
     };
   }
 
@@ -30,8 +30,9 @@ export default class Recipe extends Component {
   }
 
   showRecipe() {
-    if (!this.state.recipe) {
-      return
+    console.log(this.state.recipe[0])
+    if (!this.state.recipe[0]) {
+      return <h1>There doesn't appear to be a recipe in here.</h1>
     }
     let recipe = this.state.recipe
     recipe = recipe[0]

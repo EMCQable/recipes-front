@@ -7,6 +7,8 @@ import NotFound from "./containers/NotFound";
 import Recipe from "./containers/Recipe";
 import CreateRecipe from "./containers/CreateRecipe";
 import Planner from "./containers/Planner";
+import Login from "./containers/Login";
+import Signup from "./containers/Signup";
 import AppliedRoute from "./components/AppliedRoute";
 
 
@@ -18,6 +20,8 @@ export default ({childProps}) =>
     <Route path="/users/:id" exact component={User} />
     <AppliedRoute path="/search" exact component={Search} props={childProps} />
     <AppliedRoute path="/recipes/:id" component={Recipe} props={childProps} />
+    <AppliedRoute path="/login" exact component={Login} props={childProps} />
+    <AppliedRoute path="/signup" exact component={Signup} props={childProps} />kl
     <Route component={NotFound} />
   </Switch>;
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
 import RecipeService from './services/RecipeService'
+import { Auth } from "aws-amplify";
 import './App.css';
 
 class App extends Component {
@@ -11,19 +12,21 @@ class App extends Component {
     this.file = null;
     this.state = {
       filter: '',
+      isAuthenticated: false,
+      isAuthenticating: true,
       recipes: {
         Items: [
           {
-            id: 'asdf',
-            name: 'nomen'
+            id: 'Place',
+            name: 'Holder'
           },
-          {
-            id: 'woop',
-            name: 'shoop'
-          }
         ]
       }
     };
+  }
+
+  userHasAuthenticated = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
   }
 
   async componentDidMount() {
@@ -35,6 +38,19 @@ class App extends Component {
     } catch (e) {
       alert(e);
     }
+
+    try {
+      if (await Auth.currentSession()) {
+        this.userHasAuthenticated(true);
+      }
+    }
+    catch(e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+    }
+  
+    this.setState({ isAuthenticating: false });
   }
 
   getRecipes() {
@@ -42,11 +58,16 @@ class App extends Component {
   }
 
   render() {
-    const recipes = this.state.recipes
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      recipes: this.state.recipes,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
     return (
+      !this.state.isAuthenticating &&
       <div className="App">
-        <NavBar />
-        <Routes childProps={recipes} />
+        <NavBar authentication={childProps}/>
+        <Routes childProps={childProps} />
       </div>
     );
   }

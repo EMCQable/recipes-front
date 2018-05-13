@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Search.css";
 
-const showRecipes = ({Items}) => {
+const showRecipes = ({recipes}) => {
   return (
     <div>
       <ul>
-        {Items.map(element => {
+        {recipes.Items.map(element => {
           const link = `recipes/${element.id}`;
           return <li key={element.id} ><Link to={link} > {element.name}</Link></li>
         })}
