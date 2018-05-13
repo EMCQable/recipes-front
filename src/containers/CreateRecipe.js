@@ -46,7 +46,8 @@ export default class CreateRecipe extends Component {
       }
     }
 
-    console.log(await RecipeService.create(Item))
+    const newly = await RecipeService.create(Item)
+    this.props.recipes.Items.push(newly)
 
     this.setState({ name: ""});
     this.setState({ ingredient1: ""});

@@ -30,7 +30,6 @@ export default class Recipe extends Component {
   }
 
   showRecipe() {
-    console.log(this.state.recipe[0])
     if (!this.state.recipe[0]) {
       return <h1>There doesn't appear to be a recipe in here.</h1>
     }

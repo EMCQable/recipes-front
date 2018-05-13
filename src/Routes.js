@@ -15,7 +15,7 @@ import AppliedRoute from "./components/AppliedRoute";
 export default ({childProps}) =>
   <Switch>
     <Route path="/" exact component={Home} />
-    <Route path="/create" exact component={CreateRecipe} />
+    <AppliedRoute path="/create" exact component={CreateRecipe} props={childProps}/>
     <Route path="/plan" exact component={Planner} />
     <Route path="/users/:id" exact component={User} />
     <AppliedRoute path="/search" exact component={Search} props={childProps} />

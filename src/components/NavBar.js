@@ -8,7 +8,6 @@ const NavBar = ({ authentication }) => {
     await Auth.signOut();
     authentication.userHasAuthenticated(false);
   }
-  console.log(authentication)
   return (
     <Navbar>
       <Navbar.Header>
