@@ -21,7 +21,7 @@ export default ({childProps}) =>
     <AppliedRoute path="/search" exact component={Search} props={childProps} />
     <AppliedRoute path="/recipes/:id" component={Recipe} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
-    <AppliedRoute path="/signup" exact component={Signup} props={childProps} />kl
+    <AppliedRoute path="/signup" exact component={Signup} props={childProps} />
     <Route component={NotFound} />
   </Switch>;
 

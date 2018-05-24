@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RecipeService from '../services/RecipeService'
-import "./Home.css";
+import { Glyphicon } from "react-bootstrap";
+import "./Recipe.css";
 
 export default class Recipe extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ export default class Recipe extends Component {
 
 
     this.state = {
-      recipe: []
+      recipe: [],
+      loaded: false
     };
   }
 
@@ -18,7 +20,8 @@ export default class Recipe extends Component {
       recipe = recipe.Items
 
       this.setState({
-        recipe
+        recipe,
+        loaded: true
       });
     } catch (e) {
       alert(e);
@@ -30,6 +33,9 @@ export default class Recipe extends Component {
   }
 
   showRecipe() {
+    if (!this.state.loaded) {
+      return <Glyphicon glyph="refresh" className="spinning" />
+    }
     if (!this.state.recipe[0]) {
       return <h1>There doesn't appear to be a recipe in here.</h1>
     }
@@ -38,19 +44,19 @@ export default class Recipe extends Component {
     return (
       <div>
         <h1>{recipe.name}</h1>
-        <p>{recipe.ingredients}</p>
+        {recipe.ingredients.map(ingredient =><p key={ingredient}>{ingredient}</p>)}
       </div>
-    )
-  }
-
+      )
+    }
+  
   render() {
     return (
       <div className="Home">
-        <div className="lander">
-          {this.showRecipe()}
+          <div className="lander">
+            {this.showRecipe()}
+          </div>
         </div>
-      </div>
-    );
-  }
-}
-
+        );
+      }
+    }
+    

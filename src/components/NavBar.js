@@ -2,6 +2,7 @@ import { Navbar, NavItem, Nav } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import React, { Fragment } from 'react'
 import {Auth} from 'aws-amplify'
+import { LinkContainer } from "react-router-bootstrap";
 
 const NavBar = ({ authentication }) => {
   const handleLogout = async event => {
@@ -16,29 +17,17 @@ const NavBar = ({ authentication }) => {
         </Navbar.Brand>
       </Navbar.Header>
       <Nav pullRight>
-        <NavItem>
-          <Link to="/plan">Plan your meals</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/Search">Find a Recipe</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/create">Create a new Recipe</Link>
-        </NavItem>
+        <LinkContainer to="/plan" ><NavItem>Plan your meals</NavItem></LinkContainer>
+        <LinkContainer to="/search" ><NavItem>Find a Recipe</NavItem></LinkContainer>
+        <LinkContainer to="/create" ><NavItem>Create a new Recipe</NavItem></LinkContainer>
         {authentication.isAuthenticated
           ? <Fragment>
-            <NavItem>
-              <Link to="/users/1">User</Link>
-            </NavItem>
+            <LinkContainer to="/plan" ><NavItem href="/users/1"> User</NavItem></LinkContainer>
             <NavItem onClick={handleLogout}>Logout</NavItem>
           </Fragment>
           : <Fragment>
-            <NavItem>
-              <Link to="/signup">Signup</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/login">Login</Link>
-            </NavItem>
+            <LinkContainer to="/signup" ><NavItem>Signup</NavItem></LinkContainer>
+            <LinkContainer to="/login" ><NavItem>Login</NavItem></LinkContainer>
           </Fragment>
         }
       </Nav>
