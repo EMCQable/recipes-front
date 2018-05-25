@@ -5,6 +5,7 @@ import RecipeService from './services/RecipeService'
 import { Auth } from "aws-amplify";
 import './App.css';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -73,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

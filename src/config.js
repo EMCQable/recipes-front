@@ -4,8 +4,15 @@ export default {
     BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
   },
   apiGateway: {
-    REGION: "YOUR_API_GATEWAY_REGION",
-    URL: "YOUR_API_GATEWAY_URL"
+    REGION: "eu-west-2",
+    notes:
+      {
+        URL: "YOUR_API_GATEWAY_URL"
+      },
+    users:
+      {
+        URL: " https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod"
+      },
   },
   cognito: {
     REGION: "eu-west-2",

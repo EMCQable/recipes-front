@@ -5,10 +5,10 @@ export default class User extends Component {
 
   render() {
     return (
-      <div className="User">
+      <div className="Preferences">
         <div className="lander">
           <h1>Recipes</h1>
-          <p>User page</p>
+          <p>Settings page</p>
         </div>
       </div>
     );

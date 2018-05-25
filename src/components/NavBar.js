@@ -1,13 +1,15 @@
 import { Navbar, NavItem, Nav } from 'react-bootstrap'
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import React, { Fragment } from 'react'
-import {Auth} from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 import { LinkContainer } from "react-router-bootstrap";
 
-const NavBar = ({ authentication }) => {
+const NavBar = (props) => {
+  const { authentication } = props
   const handleLogout = async event => {
     await Auth.signOut();
     authentication.userHasAuthenticated(false);
+    props.history.push("/");
   }
   return (
     <Navbar>
@@ -17,12 +19,12 @@ const NavBar = ({ authentication }) => {
         </Navbar.Brand>
       </Navbar.Header>
       <Nav pullRight>
-        <LinkContainer to="/plan" ><NavItem>Plan your meals</NavItem></LinkContainer>
         <LinkContainer to="/search" ><NavItem>Find a Recipe</NavItem></LinkContainer>
         <LinkContainer to="/create" ><NavItem>Create a new Recipe</NavItem></LinkContainer>
         {authentication.isAuthenticated
           ? <Fragment>
-            <LinkContainer to="/plan" ><NavItem href="/users/1"> User</NavItem></LinkContainer>
+            <LinkContainer to="/plan" ><NavItem>Plan your meals</NavItem></LinkContainer>
+            <LinkContainer to="/settings" ><NavItem>Preferences</NavItem></LinkContainer>
             <NavItem onClick={handleLogout}>Logout</NavItem>
           </Fragment>
           : <Fragment>
@@ -34,4 +36,4 @@ const NavBar = ({ authentication }) => {
     </Navbar>
   )
 }
-export default NavBar
+export default withRouter(NavBar)

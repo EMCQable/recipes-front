@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import {
+  HelpBlock,
   FormGroup,
   FormControl,
   ControlLabel
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ export default class Signup extends Component {
       this.setState({
         newUser
       });
+
     } catch (e) {
       alert(e.message);
     }
@@ -66,17 +68,29 @@ export default class Signup extends Component {
   }
 
   handleConfirmationSubmit = async event => {
-    event.preventDefault();
-
+    event.preventDefault()
     this.setState({ isLoading: true });
 
     try {
-      await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
-      await Auth.signIn(this.state.email, this.state.password);
+      await Auth.confirmSignUp(this.state.username, this.state.confirmationCode);
+      await Auth.signIn(this.state.username, this.state.password);
+      const day = new Date()
+
+      await API.post("users", "/users", {
+        body: 
+        {
+          Item:
+          {
+            created: day
+          }
+        }
+      }
+    )
 
       this.props.userHasAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
+      console.log(e)
       alert(e.message);
       this.setState({ isLoading: false });
     }
@@ -84,7 +98,7 @@ export default class Signup extends Component {
 
   renderConfirmationForm() {
     return (
-      /*<form onSubmit={this.handleConfirmationSubmit}>
+      <form onSubmit={this.handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode" bsSize="large">
           <ControlLabel>Confirmation Code</ControlLabel>
           <FormControl
@@ -104,11 +118,7 @@ export default class Signup extends Component {
           text="Verify"
           loadingText="Verifying…"
         />
-      </form>*/
-      <div>
-        <h1>Success!</h1>
-        <p>You will receive an email with a confirmation link shortly</p>
-      </div>
+      </form>
     );
   }
 

@@ -17,7 +17,7 @@ export default ({childProps}) =>
     <Route path="/" exact component={Home} />
     <AppliedRoute path="/create" exact component={CreateRecipe} props={childProps}/>
     <Route path="/plan" exact component={Planner} />
-    <Route path="/users/:id" exact component={User} />
+    <Route path="/settings" exact component={User} />
     <AppliedRoute path="/search" exact component={Search} props={childProps} />
     <AppliedRoute path="/recipes/:id" component={Recipe} props={childProps} />
     <AppliedRoute path="/login" exact component={Login} props={childProps} />
