@@ -12,46 +12,30 @@ export default class Planner extends Component {
             title: 'All Day Event',
             start: '2018-05-01'
         },
-        {
-            title: 'Long Event',
-            start: '2018-05-07',
-            end: '2018-05-10'
-        },
-        {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2018-05-09T16:00:00'
-        },
-        {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2018-05-16T16:00:00'
-        },
-        {
-            title: 'Conference',
-            start: '2018-05-11',
-            end: '2018-05-13'
-        },
-        {
-            title: 'Meeting',
-            start: '2018-05-12T10:30:00',
-            end: '2018-05-12T12:30:00'
-        },
-        {
-            title: 'Birthday Party',
-            start: '2018-05-13T07:00:00'
-        },
-        {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2018-05-28'
-        }
     ],	
     }
   }
 
-  render() {
+  componentDidMount(){
+    this.getSchedule()
+  }
 
+  getSchedule(){
+    let schedule = this.props.user.Items[0].schedule
+    const scheduleAsDates = schedule.map(this.formatCookDate)
+    this.setState({
+      events: scheduleAsDates
+    })
+  }
+
+  formatCookDate(cookDate){
+    return {
+      title: cookDate.food.name,
+      start: cookDate.date.start,
+    }
+  }
+
+  render() {
     const today = new Date()
     let month = (today.getMonth() + 1)
     if (month < 10){

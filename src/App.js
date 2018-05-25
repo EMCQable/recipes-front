@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
 import RecipeService from './services/RecipeService'
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import './App.css';
 
 
@@ -15,6 +15,7 @@ class App extends Component {
       filter: '',
       isAuthenticated: false,
       isAuthenticating: true,
+      user: {},
       recipes: {
         Items: [
           {
@@ -43,6 +44,8 @@ class App extends Component {
     try {
       if (await Auth.currentSession()) {
         this.userHasAuthenticated(true);
+        const user = await API.get("users", "/users/1")
+        this.setState({user})
       }
     }
     catch(e) {
@@ -62,12 +65,13 @@ class App extends Component {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
       recipes: this.state.recipes,
-      userHasAuthenticated: this.userHasAuthenticated
+      userHasAuthenticated: this.userHasAuthenticated,
+      user: this.state.user
     };
     return (
       !this.state.isAuthenticating &&
       <div className="App">
-        <NavBar authentication={childProps}/>
+        <NavBar authentication={childProps} />
         <Routes childProps={childProps} />
       </div>
     );

@@ -77,15 +77,15 @@ export default class Signup extends Component {
       const day = new Date()
 
       await API.post("users", "/users", {
-        body: 
-        {
-          Item:
+        body:
           {
-            created: day
+            Item:
+              {
+                created: day,
+                schedule: []
+              }
           }
-        }
-      }
-    )
+      })
 
       this.props.userHasAuthenticated(true);
       this.props.history.push("/");
