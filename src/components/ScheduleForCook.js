@@ -52,9 +52,9 @@ export default class ScheduleForCook extends React.Component {
         start: this.state.formattedValue
       }
     }
-        /**this.setState({
+    this.setState({
       selectedDate: null
-    })**/
+    })
 
     schedule.push(cookDate)
 

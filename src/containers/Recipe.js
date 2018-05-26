@@ -46,7 +46,7 @@ export default class Recipe extends Component {
       <div>
         <h1>{recipe.name}</h1>
         {recipe.ingredients.map(ingredient => <p key={ingredient}>{ingredient}</p>)}
-        <ScheduleForCook recipe={this.state.recipe} user={this.props.user}/>
+        {this.props.isAuthenticated && <ScheduleForCook recipe={this.state.recipe} user={this.props.user}/>}
       </div>
     )
   }
