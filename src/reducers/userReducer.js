@@ -1,5 +1,7 @@
 import { Auth, API } from "aws-amplify";
 import userService from '../services/Users'
+import { initSchedule } from './scheduleReducer'
+
 
 const initState = {
   user: null,
@@ -40,21 +42,18 @@ export const createUser = (username, password, email) => {
 export const checkSession = () => {
   return async (dispatch) => {
     try {
-      if (await Auth.currentSession()) {
+      const session = await Auth.currentSession()
+      if (session) {
+        dispatch(initSchedule())
         dispatch({
           type: 'LOGIN'
         })
-      } else {
-        console.log('woop')
-        dispatch({
-          type: 'LOGOUT'
-        })
       }
-    }
-    catch (e) {
+    } catch (e) {
       dispatch({
         type: 'LOGOUT'
       })
+
       if (e !== 'No current user') {
         alert(e);
       }
@@ -78,7 +77,7 @@ export const confirmUser = (username, password) => {
         }
     })
     await userService.create()
-
+    dispatch(initSchedule())
     dispatch({
       type: 'LOGIN',
     })
@@ -88,6 +87,7 @@ export const confirmUser = (username, password) => {
 export const login = (username, password) => {
   return async (dispatch) => {
     await Auth.signIn(username, password);
+    dispatch(initSchedule())
     dispatch({
       type: 'LOGIN',
     })

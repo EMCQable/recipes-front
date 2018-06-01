@@ -20,7 +20,7 @@ export default class Signup extends Component {
       password: "",
       confirmPassword: "",
       confirmationCode: "",
-      isConfirming: false,
+      newUser: null,
     };
   }
 
@@ -56,8 +56,9 @@ export default class Signup extends Component {
           email: this.state.email,
         }
       });
+      console.log(newUser)
       this.setState({
-        isConfirming: true
+        newUser
       });
 
     } catch (e) {
@@ -175,7 +176,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        {this.state.isConfirming === false
+        {this.state.newUser === null
           ? this.renderForm()
           : this.renderConfirmationForm()}
       </div>

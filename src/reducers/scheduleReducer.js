@@ -1,4 +1,4 @@
-import { API } from "aws-amplify";
+import userService from '../services/Users'
 
 const scheduleReducer = (state = [], action) => {
   switch (action.type) {
@@ -14,17 +14,18 @@ const scheduleReducer = (state = [], action) => {
 
 export const initSchedule = () => {
   return async (dispatch) => {
-    const recipes = await API.get()
+    const schedule = await userService.getUser('1')
+    console.log(schedule)
     dispatch({
       type: 'INIT_SCHEDULE',
-      data: recipes
+      data: schedule
     })
   }
 }
 
 export const addCook = (content) => {
   return async (dispatch) => {
-    const recipe = await API.create(content)
+    const recipe = await userService.update(content)
     dispatch({
       type: 'NEW_COOK',
       data: recipe

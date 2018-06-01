@@ -2,15 +2,12 @@ import { API } from 'aws-amplify'
 
 const apiName = 'users'
 
-const getRecipe = (id) => {
+const getUser = async (id) => {
   const path = `/${id}`
-  let myInit = { // OPTIONAL
-    body: {}, // replace this with attributes you need
-  }
-  return API.get(apiName, path, myInit)
+  return await API.get(apiName, path)
 }
 
-const create = () => {
+const create = async () => {
   const day = new Date()
   const path = '/'
   let myInit = { // OPTIONAL
@@ -22,10 +19,10 @@ const create = () => {
         }
     }, // replace this with attributes you need
   }
-  return API.post(apiName, path, myInit)
+  return await API.post(apiName, path, myInit)
 }
 
-const update = (id, newObject) => {
+const update = async (id, newObject) => {
   const path = `/${id}`
   let myInit = { // OPTIONAL
     body: {
@@ -34,7 +31,7 @@ const update = (id, newObject) => {
       }
     }, // replace this with attributes you need
   }
-  return API.post(apiName, path, myInit)
+  return await API.post(apiName, path, myInit)
 }
 
-export default { getRecipe, create, update }
+export default { getUser, create, update }

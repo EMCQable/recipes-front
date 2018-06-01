@@ -7,7 +7,7 @@ import userReducer from './reducers/userReducer'
 
 const reducer = combineReducers({
   recipes: recipeReducer,
-  schedules: scheduleReducer,
+  schedule: scheduleReducer,
   user: userReducer
 })
 

@@ -1,25 +1,26 @@
 import { API } from 'aws-amplify'
 
-const getAll = () => {
-  const apiName = 'users'
+const getAll = async () => {
+  const apiName = 'recipes'
   const path = '/'
   let myInit = { // OPTIONAL
     body: {}, // replace this with attributes you need
   }
-  return API.get(apiName, path, myInit)
+  const data = await API.get(apiName, path, myInit)
+  return data
 }
 
-const getRecipe = (id) => {
-  const apiName = 'users'
+const getRecipe = async (id) => {
+  const apiName = 'recipes'
   const path = `/${id}`
   let myInit = { // OPTIONAL
     body: {}, // replace this with attributes you need
   }
-  return API.get(apiName, path, myInit)
+  return await API.get(apiName, path, myInit)
 }
 
-const create = (newObject) => {
-  const apiName = 'users'
+const create = async (newObject) => {
+  const apiName = 'recipes'
   const path = '/'
   let myInit = { // OPTIONAL
     body: {
@@ -28,7 +29,7 @@ const create = (newObject) => {
       }
     }, // replace this with attributes you need
   }
-  return API.post(apiName, path, myInit)
+  return await API.post(apiName, path, myInit)
 }
 
 export default { getAll, getRecipe, create }

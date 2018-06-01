@@ -3,9 +3,10 @@ import { withRouter } from "react-router-dom";
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
 import RecipeService from './services/Recipes'
-import { Auth, API } from "aws-amplify";
+import userService from './services/Users'
 import { connect } from 'react-redux'
 import { checkSession } from './reducers/userReducer'
+import { initRecipes } from './reducers/recipeReducer'
 import './App.css';
 
 
@@ -17,7 +18,7 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      user:  {},
+      user: {},
       recipes: {
         Items: [
         ]
@@ -30,16 +31,21 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    this.props.checkSession()
+    await this.props.checkSession()
+    await this.props.initRecipes()
 
     try {
-      let recipes = await this.getRecipes();
+      let recipes = await this.getRecipes()
+      const user = await userService.getUser('1')
+      console.log(user)
       this.setState({
-        recipes
+        recipes,
+        user
       });
     } catch (e) {
       alert(e);
     }
+    console.log(this.state)
   }
 
   getRecipes() {
@@ -47,6 +53,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     const childProps = {
       isAuthenticated: this.props.isAuthenticated,
       recipes: this.state.recipes,
@@ -64,13 +71,15 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-  checkSession
+  checkSession,
+  initRecipes,
 }
 
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.user.isAuthenticated,
-    isAuthenticating: state.user.isAuthenticating
+    isAuthenticating: state.user.isAuthenticating,
+    schedule: state.schedule
   }
 }
 
