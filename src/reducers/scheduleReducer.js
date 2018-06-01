@@ -1,4 +1,4 @@
-import { Auth, API } from "aws-amplify";
+import { API } from "aws-amplify";
 
 const scheduleReducer = (state = [], action) => {
   switch (action.type) {

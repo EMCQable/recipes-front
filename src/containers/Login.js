@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import { Auth } from "aws-amplify";
 import LoaderButton from '../components/LoaderButton'
 import "./Login.css";
+import { login } from '../reducers/userReducer'
+import { connect } from 'react-redux'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -27,12 +28,11 @@ export default class Login extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-  
+
     this.setState({ isLoading: true });
-  
+
     try {
-      await Auth.signIn(this.state.username, this.state.password);
-      this.props.userHasAuthenticated(true);
+      this.props.login(this.state.username, this.state.password)
       this.props.history.push("/");
     } catch (e) {
       alert(e.message);
@@ -75,3 +75,12 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  login
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login)

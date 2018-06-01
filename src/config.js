@@ -5,13 +5,13 @@ export default {
   },
   apiGateway: {
     REGION: "eu-west-2",
-    notes:
+    recipes:
       {
-        URL: "YOUR_API_GATEWAY_URL"
+        URL: "https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod/recipes"
       },
     users:
       {
-        URL: " https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod"
+        URL: "https://fqkcs8cdid.execute-api.eu-west-2.amazonaws.com/prod/users"
       },
   },
   cognito: {

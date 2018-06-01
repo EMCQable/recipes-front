@@ -1,4 +1,4 @@
-import RecipeService from '../services/Recipes'
+import RecipeService from '../services/Recipes2'
 
 const recipeReducer = (state = [], action) => {
   switch (action.type) {

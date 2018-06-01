@@ -20,7 +20,7 @@ export default class Signup extends Component {
       password: "",
       confirmPassword: "",
       confirmationCode: "",
-      newUser: null
+      isConfirming: false,
     };
   }
 
@@ -57,7 +57,7 @@ export default class Signup extends Component {
         }
       });
       this.setState({
-        newUser
+        isConfirming: true
       });
 
     } catch (e) {
@@ -76,7 +76,7 @@ export default class Signup extends Component {
       await Auth.signIn(this.state.username, this.state.password);
       const day = new Date()
 
-      await API.post("users", "/users", {
+      await API.post("users", "/", {
         body:
           {
             Item:
@@ -175,7 +175,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        {this.state.newUser === null
+        {this.state.isConfirming === false
           ? this.renderForm()
           : this.renderConfirmationForm()}
       </div>

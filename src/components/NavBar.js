@@ -1,14 +1,13 @@
 import { Navbar, NavItem, Nav } from 'react-bootstrap'
 import { Link, withRouter } from "react-router-dom";
 import React, { Fragment } from 'react'
-import { Auth } from 'aws-amplify'
 import { LinkContainer } from "react-router-bootstrap";
+import { connect } from 'react-redux'
+import { logout } from '../reducers/userReducer'
 
 const NavBar = (props) => {
-  const { authentication } = props
   const handleLogout = async event => {
-    await Auth.signOut();
-    authentication.userHasAuthenticated(false);
+    props.logout()
     props.history.push("/");
   }
   return (
@@ -21,7 +20,7 @@ const NavBar = (props) => {
       <Nav pullRight>
         <LinkContainer to="/search" ><NavItem>Find a Recipe</NavItem></LinkContainer>
         <LinkContainer to="/create" ><NavItem>Create a new Recipe</NavItem></LinkContainer>
-        {authentication.isAuthenticated
+        {props.isAuthenticated
           ? <Fragment>
             <LinkContainer to="/plan" ><NavItem>Plan your meals</NavItem></LinkContainer>
             <LinkContainer to="/settings" ><NavItem>Preferences</NavItem></LinkContainer>
@@ -36,4 +35,18 @@ const NavBar = (props) => {
     </Navbar>
   )
 }
-export default withRouter(NavBar)
+
+const mapDispatchToProps = {
+  logout
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+  }
+}
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar))

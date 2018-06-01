@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
 import RecipeService from './services/Recipes'
 import { Auth, API } from "aws-amplify";
+import { connect } from 'react-redux'
+import { checkSession } from './reducers/userReducer'
 import './App.css';
 
 
@@ -14,7 +17,7 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      user: {},
+      user:  {},
       recipes: {
         Items: [
         ]
@@ -27,6 +30,8 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    this.props.checkSession()
+
     try {
       let recipes = await this.getRecipes();
       this.setState({
@@ -35,21 +40,6 @@ class App extends Component {
     } catch (e) {
       alert(e);
     }
-
-    try {
-      if (await Auth.currentSession()) {
-        this.userHasAuthenticated(true);
-        const user = await API.get("users", "/users/1")
-        this.setState({user})
-      }
-    }
-    catch(e) {
-      if (e !== 'No current user') {
-        alert(e);
-      }
-    }
-  
-    this.setState({ isAuthenticating: false });
   }
 
   getRecipes() {
@@ -58,19 +48,33 @@ class App extends Component {
 
   render() {
     const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
+      isAuthenticated: this.props.isAuthenticated,
       recipes: this.state.recipes,
       userHasAuthenticated: this.userHasAuthenticated,
       user: this.state.user
     };
     return (
-      !this.state.isAuthenticating &&
+      !this.props.isAuthenticating &&
       <div className="App">
-        <NavBar authentication={childProps} />
+        <NavBar />
         <Routes childProps={childProps} />
       </div>
     );
   }
 }
 
-export default App
+const mapDispatchToProps = {
+  checkSession
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+    isAuthenticating: state.user.isAuthenticating
+  }
+}
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App))
