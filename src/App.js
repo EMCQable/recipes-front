@@ -12,16 +12,11 @@ class App extends Component {
 
     this.file = null;
     this.state = {
-      filter: '',
       isAuthenticated: false,
       isAuthenticating: true,
       user: {},
       recipes: {
         Items: [
-          {
-            id: 'Place',
-            name: 'Holder'
-          },
         ]
       }
     };
