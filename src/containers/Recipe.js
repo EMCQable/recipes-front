@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RecipeService from '../services/RecipeService'
+import RecipeService from '../services/Recipes'
 import { Glyphicon } from "react-bootstrap"
 import ScheduleForCook from '../components/ScheduleForCook'
 import "./Recipe.css";

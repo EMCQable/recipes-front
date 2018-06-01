@@ -6,7 +6,7 @@ import {
   ControlLabel,
   Button
 } from "react-bootstrap";
-import RecipeService from '../services/RecipeService'
+import RecipeService from '../services/Recipes'
 
 export default class CreateRecipe extends Component {
   constructor(props) {

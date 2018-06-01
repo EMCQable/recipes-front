@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import Amplify from "aws-amplify";
 import config from "./config";
+import store from './store'
+import { Provider } from 'react-redux'
 
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -36,8 +38,12 @@ Amplify.configure({
   }
 });
 
+
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById('root'));
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)

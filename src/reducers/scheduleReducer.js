@@ -1,3 +1,4 @@
+import { Auth, API } from "aws-amplify";
 
 const scheduleReducer = (state = [], action) => {
   switch (action.type) {
@@ -13,6 +14,7 @@ const scheduleReducer = (state = [], action) => {
 
 export const initSchedule = () => {
   return async (dispatch) => {
+    const recipes = await API.get()
     dispatch({
       type: 'INIT_SCHEDULE',
       data: recipes
@@ -22,7 +24,7 @@ export const initSchedule = () => {
 
 export const addCook = (content) => {
   return async (dispatch) => {
-    const recipe = await RecipeService.create(content)
+    const recipe = await API.create(content)
     dispatch({
       type: 'NEW_COOK',
       data: recipe
@@ -30,4 +32,4 @@ export const addCook = (content) => {
   }
 }
 
-export default recipeReducer
+export default scheduleReducer

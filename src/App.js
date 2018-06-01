@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
-import RecipeService from './services/RecipeService'
+import RecipeService from './services/Recipes'
 import { Auth, API } from "aws-amplify";
 import './App.css';
 
