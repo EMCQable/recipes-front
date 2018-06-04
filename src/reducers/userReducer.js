@@ -44,7 +44,6 @@ export const checkSession = () => {
     try {
       const session = await Auth.currentSession()
       if (session) {
-        dispatch(initSchedule())
         dispatch({
           type: 'LOGIN'
         })
@@ -66,7 +65,7 @@ export const confirmUser = (username, password) => {
     await Auth.signIn(username, password);
     const day = new Date()
 
-    await API.post("users", "/", {
+    /*await API.post("users", "/", {
       body:
         {
           Item:
@@ -75,7 +74,7 @@ export const confirmUser = (username, password) => {
               schedule: []
             }
         }
-    })
+    })*/
     await userService.create()
     dispatch(initSchedule())
     dispatch({

@@ -15,7 +15,8 @@ const create = async () => {
       Item:
         {
           created: day,
-          schedule: []
+          schedule: [],
+          settings: { servingsPerDay: '3' }
         }
     }, // replace this with attributes you need
   }

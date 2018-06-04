@@ -18,9 +18,21 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      user: {},
-      recipes: {
-        Items: [
+      recipes: {},
+      user: {
+        Items: [{
+          schedule:
+            [{
+              date: {
+                start: '2018-05-25'
+              },
+              food: {
+                name: 'stuff',
+                servings: '5'
+              }
+            }],
+          settings: { servingsPerDay: '3' }
+        }
         ]
       }
     };
@@ -37,7 +49,6 @@ class App extends Component {
     try {
       let recipes = await this.getRecipes()
       const user = await userService.getUser('1')
-      console.log(user)
       this.setState({
         recipes,
         user
@@ -45,7 +56,6 @@ class App extends Component {
     } catch (e) {
       alert(e);
     }
-    console.log(this.state)
   }
 
   getRecipes() {
@@ -53,7 +63,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     const childProps = {
       isAuthenticated: this.props.isAuthenticated,
       recipes: this.state.recipes,
@@ -79,7 +88,6 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.user.isAuthenticated,
     isAuthenticating: state.user.isAuthenticating,
-    schedule: state.schedule
   }
 }
 

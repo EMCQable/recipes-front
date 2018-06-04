@@ -2,46 +2,65 @@ import React, { Component } from 'react';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
 import FullCalendar from 'fullcalendar-reactwrapper';
 import './Planner.css'
+import { advanceDate, formatDate } from '../utils/dateUtils'
+import { connect } from 'react-redux'
+import { initSchedule } from '../reducers/scheduleReducer'
 
-export default class Planner extends Component {
+
+
+class Planner extends Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [
         {
-            title: 'All Day Event',
-            start: '2018-05-01'
+          title: 'All Day Event',
+          start: "2018-05-01"
         },
-    ],	
+      ],
     }
   }
 
-  componentDidMount(){
+  async componentDidMount() {
+    await this.props.initSchedule()
     this.getSchedule()
   }
 
-  getSchedule(){
-    let schedule = this.props.user.Items[0].schedule
+  getSchedule() {
+    let schedule = this.props.schedule.Items[0].schedule
+    const servingsPerDay = this.props.schedule.Items[0].settings.servingsPerDay
+    schedule.forEach(cookDate => cookDate.servingsPerDay = servingsPerDay)
     const scheduleAsDates = schedule.map(this.formatCookDate)
     this.setState({
       events: scheduleAsDates
     })
   }
 
-  formatCookDate(cookDate){
+  formatCookDate(cookDate) {
+    let servings = ''
+    let end = ''
+    if (cookDate.food.servings) {
+      servings = Number(cookDate.food.servings)
+      const servingsPerDay = Number(cookDate.servingsPerDay)
+
+      const advance = Math.floor(servings / servingsPerDay)
+
+      const date = cookDate.date.start
+
+      end = advanceDate(date, (advance + 1))
+
+    }
+
     return {
       title: cookDate.food.name,
       start: cookDate.date.start,
+      end: end
     }
   }
 
   render() {
     const today = new Date()
-    let month = (today.getMonth() + 1)
-    if (month < 10){
-      month = '0' + month
-    }
-    const defaultDate = (today.getFullYear() + '-' + month + '-' + today.getDate())
+    const defaultDate = formatDate(today.getFullYear(), today.getMonth() + 1, today.getDate())
 
     return (
       <div className="calendar" id="example-component">
@@ -63,3 +82,17 @@ export default class Planner extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  initSchedule
+}
+
+const mapStateToProps = (state) => {
+  return {
+    schedule: state.schedule
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Planner)

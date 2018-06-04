@@ -7,8 +7,10 @@ import {
   Button
 } from "react-bootstrap";
 import RecipeService from '../services/Recipes'
+import { connect } from 'react-redux'
+import { addRecipe } from '../reducers/recipeReducer'
 
-export default class CreateRecipe extends Component {
+class CreateRecipe extends Component {
   constructor(props) {
     super(props);
 
@@ -16,6 +18,7 @@ export default class CreateRecipe extends Component {
       name: "",
       ingredient1: "",
       ingredient2: "",
+      servings: 4,
     };
   }
 
@@ -23,13 +26,22 @@ export default class CreateRecipe extends Component {
     return (
       this.state.name.length > 0 &&
       this.state.ingredient1.length > 0 &&
-      this.state.ingredient2.length > 0
+      this.state.ingredient2.length > 0 &&
+      Number.isInteger(this.state.servings) &&
+      this.state.servings > 0 &&
+      this.state.servings < 11
     );
   }
 
   handleChange = event => {
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.id]: event.target.value,
+    });
+  }
+
+  handleServingsChange = event => {
+    this.setState({
+      servings: Number(event.target.value)
     });
   }
 
@@ -37,21 +49,34 @@ export default class CreateRecipe extends Component {
     event.preventDefault();
 
     const Item = {
-      Item: {
-        name: this.state.name,
-        ingredients:[
-          this.state.ingredient1,          
-          this.state.ingredient2,
-        ]
-      }
+      name: this.state.name,
+      ingredients: [
+        this.state.ingredient1,
+        this.state.ingredient2,
+      ],
+      servings: this.state.servings.toString()
     }
 
-    const newly = await RecipeService.create(Item)
-    this.props.recipes.Items.push(newly)
+    console.log(Item)
 
-    this.setState({ name: ""});
-    this.setState({ ingredient1: ""});
-    this.setState({ ingredient2: ""});
+    //const newly = await RecipeService.create(Item)
+    //this.props.recipes.Items.push(newly)
+    this.props.addRecipe(Item)
+
+    this.setState({
+      name: "",
+      ingredient1: "",
+      ingredient2: "",
+      servings: 4,
+    });
+  }
+
+  validateServings() {
+    if (this.state.servings > 0 &&
+      this.state.servings < 11) {
+      return 'success'
+    }
+    return 'error'
   }
 
   renderForm() {
@@ -63,6 +88,14 @@ export default class CreateRecipe extends Component {
             autoFocus
             value={this.state.name}
             onChange={this.handleChange}
+          />
+        </FormGroup>
+        <FormGroup controlId="servings" bsSize="large" validationState={this.validateServings()}>
+          <ControlLabel>Servings</ControlLabel>
+          <FormControl
+            type="number"
+            value={this.state.servings}
+            onChange={this.handleServingsChange}
           />
         </FormGroup>
         <FormGroup controlId="ingredient1" bsSize="large">
@@ -79,6 +112,7 @@ export default class CreateRecipe extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
+
         <Button
           block
           bsSize="large"
@@ -99,3 +133,11 @@ export default class CreateRecipe extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  addRecipe,
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateRecipe)

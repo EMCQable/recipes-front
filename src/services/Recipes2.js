@@ -19,14 +19,12 @@ const getRecipe = async (id) => {
   return await API.get(apiName, path, myInit)
 }
 
-const create = async (newObject) => {
+const create = async (Item) => {
   const apiName = 'recipes'
   const path = '/'
   let myInit = { // OPTIONAL
     body: {
-      Item: {
-        newObject
-      }
+      Item
     }, // replace this with attributes you need
   }
   return await API.post(apiName, path, myInit)

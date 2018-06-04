@@ -83,7 +83,10 @@ export default class Signup extends Component {
             Item:
               {
                 created: day,
-                schedule: []
+                schedule: [],
+                settings: {
+                  servingsPerDay: '3'
+                }
               }
           }
       })

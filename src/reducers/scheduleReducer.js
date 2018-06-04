@@ -1,11 +1,32 @@
 import userService from '../services/Users'
 
-const scheduleReducer = (state = [], action) => {
+const initState =
+  {
+    Items: [{
+      schedule:
+        [{
+          date: {
+            start: '2018-05-25'
+          },
+          food: {
+            name: 'stuff',
+            servings: '5'
+          }
+        }],
+      settings: { servingsPerDay: '3' }
+    }
+    ],
+    ready: false,
+  }
+
+const scheduleReducer = (state = initState, action) => {
   switch (action.type) {
     case 'NEW_COOK':
-      return [...state, action.data]
+      return { ...state, schedule: [...state.schedule, action.data] }
+    case 'CHANGE_SETTINGS':
+      return { ...state, settings:  { servingsPerDay: action.servings } }
     case 'INIT_SCHEDULE':
-      return action.data
+      return { ...action.data, ready: true }
     default:
       return state
   }
@@ -29,6 +50,17 @@ export const addCook = (content) => {
     dispatch({
       type: 'NEW_COOK',
       data: recipe
+    })
+  }
+}
+
+export const changeDailyServings = (content) => {
+  return async (dispatch) => {
+    const servings = await userService.update(content)
+    console.log(servings)
+    dispatch({
+      type: 'CHANGE_SETTINGS',
+      servings
     })
   }
 }

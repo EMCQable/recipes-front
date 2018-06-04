@@ -1,9 +1,9 @@
 import RecipeService from '../services/Recipes2'
 
-const recipeReducer = (state = [], action) => {
+const recipeReducer = (state = {Items:[]}, action) => {
   switch (action.type) {
     case 'NEW_RECIPE':
-      return [...state, action.data]
+      return {Items:[...state.Items, action.data]}
     case 'INIT_RECIPES':
       return action.data
     default:

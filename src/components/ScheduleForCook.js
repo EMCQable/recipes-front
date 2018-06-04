@@ -46,7 +46,8 @@ export default class ScheduleForCook extends React.Component {
     const cookDate = {
       food: {
         id: recipe.id,
-        name: recipe.name
+        name: recipe.name,
+        servings: recipe.servings
       },
       date: {
         start: this.state.formattedValue
@@ -58,7 +59,7 @@ export default class ScheduleForCook extends React.Component {
 
     schedule.push(cookDate)
 
-    await API.put("users", "/users/1", {
+    await API.put("users", "/1", {
       body:
         {
           schedule
