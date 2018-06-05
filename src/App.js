@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import NavBar from './components/NavBar';
 import Routes from "./Routes";
+import Footer from './components/Footer'
 import RecipeService from './services/Recipes'
 import userService from './services/Users'
 import { connect } from 'react-redux'
@@ -43,16 +44,15 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    await this.props.checkSession()
-    await this.props.initRecipes()
-
     try {
-      let recipes = await this.getRecipes()
-      const user = await userService.getUser('1')
-      this.setState({
-        recipes,
-        user
-      });
+      await this.props.checkSession()
+      await this.props.initRecipes()
+      //let recipes = await this.getRecipes()
+      //const user = await userService.getUser('1')
+      //this.setState({
+        //recipes,
+        //user
+      //});
     } catch (e) {
       alert(e);
     }
@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     const childProps = {
       isAuthenticated: this.props.isAuthenticated,
-      recipes: this.state.recipes,
+      //recipes: this.state.recipes,
       userHasAuthenticated: this.userHasAuthenticated,
       user: this.state.user
     };
@@ -74,6 +74,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Routes childProps={childProps} />
+        <Footer />
       </div>
     );
   }

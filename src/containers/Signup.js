@@ -8,8 +8,10 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
 import { Auth, API } from "aws-amplify";
+import  { connect } from 'react-redux'
+import { login } from '../reducers/userReducer'
 
-export default class Signup extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
@@ -74,7 +76,8 @@ export default class Signup extends Component {
 
     try {
       await Auth.confirmSignUp(this.state.username, this.state.confirmationCode);
-      await Auth.signIn(this.state.username, this.state.password);
+      //await Auth.signIn(this.state.username, this.state.password);
+      this.props.login()
       const day = new Date()
 
       await API.post("users", "/", {
@@ -91,7 +94,7 @@ export default class Signup extends Component {
           }
       })
 
-      this.props.userHasAuthenticated(true);
+      //this.props.userHasAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
       console.log(e)
@@ -186,3 +189,19 @@ export default class Signup extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  login
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+    isAuthenticating: state.user.isAuthenticating,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup)

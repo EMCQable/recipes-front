@@ -44,6 +44,7 @@ export const checkSession = () => {
     try {
       const session = await Auth.currentSession()
       if (session) {
+        dispatch(initSchedule())
         dispatch({
           type: 'LOGIN'
         })

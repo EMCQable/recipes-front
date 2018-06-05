@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import RecipeService from '../services/Recipes'
 import { Glyphicon } from "react-bootstrap"
 import ScheduleForCook from '../components/ScheduleForCook'
+import { connect } from 'react-redux'
 import "./Recipe.css";
 
-export default class Recipe extends Component {
+class Recipe extends Component {
   constructor(props) {
     super(props);
 
@@ -47,7 +48,7 @@ export default class Recipe extends Component {
         <h1>{recipe.name}</h1>
         {recipe.ingredients.map(ingredient => <p key={ingredient}>{ingredient}</p>)}
         <p>{recipe.servings} servings</p>
-        {this.props.isAuthenticated && <ScheduleForCook recipe={this.state.recipe} user={this.props.user}/>}
+        {this.props.isAuthenticated && <ScheduleForCook recipe={this.state.recipe} />}
       </div>
     )
   }
@@ -63,4 +64,19 @@ export default class Recipe extends Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Recipe)
+
 

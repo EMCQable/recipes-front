@@ -16,13 +16,11 @@ export const initRecipes = () => {
   return async (dispatch) => {
     try {
       const recipes = await RecipeService.getAll()
-      console.log(recipes)
       dispatch({
         type: 'INIT_RECIPES',
         data: recipes
       })
     } catch (e) {
-      console.log(e)
     }
   }
 }
