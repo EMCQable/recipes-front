@@ -3,10 +3,7 @@ import { API } from 'aws-amplify'
 const getAll = async () => {
   const apiName = 'recipes'
   const path = '/'
-  let myInit = { // OPTIONAL
-    body: {}, // replace this with attributes you need
-  }
-  const data = await API.get(apiName, path, myInit)
+  const data = await API.get(apiName, path)
   return data
 }
 
