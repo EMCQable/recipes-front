@@ -4,7 +4,6 @@ import NavBar from './components/NavBar';
 import Routes from "./Routes";
 import Footer from './components/Footer'
 import RecipeService from './services/Recipes'
-import userService from './services/Users'
 import { connect } from 'react-redux'
 import { checkSession } from './reducers/userReducer'
 import { initRecipes } from './reducers/recipeReducer'

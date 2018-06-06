@@ -22,40 +22,15 @@ class Planner extends Component {
   }
 
   async componentDidMount() {
-    await this.props.initSchedule()
+    //await this.props.initSchedule()
     this.getSchedule()
   }
 
   getSchedule() {
-    let schedule = this.props.schedule.Items[0].schedule
+    /*let schedule = this.props.schedule.Items[0].schedule
     const servingsPerDay = this.props.schedule.Items[0].settings.servingsPerDay
     schedule.forEach(cookDate => cookDate.servingsPerDay = servingsPerDay)
-    const scheduleAsDates = schedule.map(this.formatCookDate)
-    this.setState({
-      events: scheduleAsDates
-    })
-  }
-
-  formatCookDate(cookDate) {
-    let servings = ''
-    let end = ''
-    if (cookDate.food.servings) {
-      servings = Number(cookDate.food.servings)
-      const servingsPerDay = Number(cookDate.servingsPerDay)
-
-      const advance = Math.floor(servings / servingsPerDay)
-
-      const date = cookDate.date.start
-
-      end = advanceDate(date, (advance + 1))
-
-    }
-
-    return {
-      title: cookDate.food.name,
-      start: cookDate.date.start,
-      end: end
-    }
+    const scheduleAsDates = schedule.map(this.formatCookDate)*/
   }
 
   render() {
@@ -75,7 +50,7 @@ class Planner extends Component {
           navLinks={true} // can click day/week names to navigate views
           editable={true}
           eventLimit={true} // allow "more" link when too many events
-          events={this.state.events}
+          events={this.props.schedule}
         />
       </div>
     );
@@ -86,9 +61,34 @@ const mapDispatchToProps = {
   initSchedule
 }
 
-const mapStateToProps = (state) => {
+const formatCookDate = (cookDate) => {
+  let servings = ''
+  let end = ''
+  if (cookDate.food.servings) {
+    servings = Number(cookDate.food.servings)
+    const servingsPerDay = Number(cookDate.servingsPerDay)
+
+    const advance = Math.floor(servings / servingsPerDay)
+
+    const date = cookDate.date.start
+
+    end = advanceDate(date, (advance + 1))
+
+  }
   return {
-    schedule: state.schedule
+    title: cookDate.food.name,
+    start: cookDate.date.start,
+    end: end
+  }
+}
+
+const mapStateToProps = (state) => {
+  let schedule = state.schedule.Items[0].schedule
+  const servingsPerDay = state.schedule.Items[0].settings.servingsPerDay
+  schedule.forEach(cookDate => cookDate.servingsPerDay = servingsPerDay)
+  const scheduleAsDates = schedule.map(formatCookDate)
+  return {
+    schedule: scheduleAsDates
   }
 }
 

@@ -1,4 +1,4 @@
-import { Auth, API } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import userService from '../services/Users'
 import { initSchedule } from './scheduleReducer'
 
@@ -64,7 +64,7 @@ export const checkSession = () => {
 export const confirmUser = (username, password) => {
   return async (dispatch) => {
     await Auth.signIn(username, password);
-    const day = new Date()
+    //const day = new Date()
 
     /*await API.post("users", "/", {
       body:

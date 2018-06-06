@@ -32,7 +32,7 @@ class ScheduleForCook extends React.Component {
 
   componentDidUpdate() {
     // Access ISO String and formatted values from the DOM.
-    var hiddenInputElement = document.getElementById("example-datepicker");
+    // var hiddenInputElement = document.getElementById("example-datepicker");
   }
 
   handleSubmit = async event => {

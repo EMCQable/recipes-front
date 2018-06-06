@@ -2,9 +2,9 @@ import React from 'react'
 import HelpThingy from './HelpThingy'
 import { Navbar } from 'react-bootstrap'
 
-const Footer = (props) => {
+const Footer = () => {
   return (
-    <Navbar fixedBottom>
+    <Navbar>
       <HelpThingy />
     </ Navbar>
   )

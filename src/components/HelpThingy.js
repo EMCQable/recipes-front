@@ -13,7 +13,7 @@ function CustomPopover({ style, location }) {
         boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
         border: '1px solid #CCC',
         borderRadius: 3,
-        //padding: 10
+        padding: 10
       }}
     >
       <strong>{getText(location)}</strong>
@@ -47,7 +47,7 @@ class HelpThingy extends React.Component {
     const location = window.location.pathname.split( '/' )[1]
     return (
       <div style={{
-        height: 120,
+        height: 100,
         position: 'relative',
         margin: 'auto'
       }} >
