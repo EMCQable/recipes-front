@@ -1,6 +1,6 @@
-import DatePicker from "react-16-bootstrap-date-picker"
+import DatePicker from 'react-16-bootstrap-date-picker'
 import React from 'react'
-import { API } from "aws-amplify";
+import { API } from 'aws-amplify'
 import { FormGroup, ControlLabel, HelpBlock, Button } from 'react-bootstrap'
 import {connect } from 'react-redux'
 import './ScheduleForCook.css'
@@ -25,14 +25,14 @@ class ScheduleForCook extends React.Component {
       newValue = value.slice(0, 10)
     }
     this.setState({
-      selectedDate: value, // ISO String, ex: "2016-11-19T12:00:00.000Z"
-      formattedValue: newValue // Formatted String, ex: "11/19/2016"
+      selectedDate: value, // ISO String, ex: '2016-11-19T12:00:00.000Z'
+      formattedValue: newValue // Formatted String, ex: '11/19/2016'
     });
   }
 
   componentDidUpdate() {
     // Access ISO String and formatted values from the DOM.
-    // var hiddenInputElement = document.getElementById("example-datepicker");
+    // var hiddenInputElement = document.getElementById('example-datepicker');
   }
 
   handleSubmit = async event => {
@@ -57,7 +57,7 @@ class ScheduleForCook extends React.Component {
 
     schedule.push(cookDate)
 
-    await API.put("users", "/1", {
+    await API.put('users', '/1', {
       body:
         {
           schedule
@@ -71,9 +71,9 @@ class ScheduleForCook extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <FormGroup >
             <ControlLabel>Add to calendar</ControlLabel>
-            <DatePicker id="example-datepicker" value={this.state.selectedDate} onChange={this.onChange} />
+            <DatePicker id='example-datepicker' value={this.state.selectedDate} onChange={this.onChange} />
             <HelpBlock></HelpBlock>
-            <Button type="submit" >Save</Button>
+            <Button type='submit' >Save</Button>
           </FormGroup>
         </form >
       </div >

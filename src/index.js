@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Amplify from "aws-amplify";
-import config from "./config";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import Amplify from 'aws-amplify'
+import config from './config'
 import store from './store'
 import { Provider } from 'react-redux'
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom'
 
 Amplify.configure({
   Auth: {
@@ -25,18 +25,18 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "recipes",
+        name: 'recipes',
         endpoint: config.apiGateway.recipes.URL,
         region: config.apiGateway.REGION
       },
       {
-        name: "users",
+        name: 'users',
         endpoint: config.apiGateway.users.URL,
         region: config.apiGateway.REGION
       },
     ]
   }
-});
+})
 
 
 ReactDOM.render(

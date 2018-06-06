@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import "./CreateRecipe.css";
+import React, { Component } from 'react';
+import './CreateRecipe.css';
 import {
   FormGroup,
   FormControl,
   ControlLabel,
   Button
-} from "react-bootstrap";
+} from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton'
 import { connect } from 'react-redux'
 import { addRecipe } from '../reducers/recipeReducer'
@@ -15,10 +15,10 @@ class CreateRecipe extends Component {
     super(props);
 
     this.state = {
-      name: "",
+      name: '',
       ingredients: 2,
-      ingredient1: "",
-      ingredient2: "",
+      ingredient1: '',
+      ingredient2: '',
       servings: 4,
       loading: false
     };
@@ -83,7 +83,7 @@ class CreateRecipe extends Component {
     await this.props.addRecipe(Item)
 
     this.setState({
-      name: "",
+      name: '',
       servings: 4,
       loading: false
     });
@@ -128,7 +128,7 @@ class CreateRecipe extends Component {
     for (let i = 1; i < this.state.ingredients + 1; i++) {
       const formId = `ingredient${i}`
       ingredientForms.push(
-        <FormGroup key={i} controlId={formId} bsSize="large">
+        <FormGroup key={i} controlId={formId} bsSize='large'>
           <ControlLabel>Ingredient {i}</ControlLabel>
           <FormControl
             type='text'
@@ -144,7 +144,7 @@ class CreateRecipe extends Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="name" bsSize="large">
+        <FormGroup controlId='name' bsSize='large'>
           <ControlLabel>Name</ControlLabel>
           <FormControl
             autoFocus
@@ -152,10 +152,10 @@ class CreateRecipe extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup controlId="servings" bsSize="large" validationState={this.validateServings()}>
+        <FormGroup controlId='servings' bsSize='large' validationState={this.validateServings()}>
           <ControlLabel>Servings</ControlLabel>
           <FormControl
-            type="number"
+            type='number'
             value={this.state.servings}
             onChange={this.handleServingsChange}
           />
@@ -163,33 +163,32 @@ class CreateRecipe extends Component {
         {this.ingredientForms()}
         <Button
           block
-          bsSize="large"
-          text=""
+          bsSize='large'
+          text=''
           onClick={this.removeIngredient()}
         >Remove Ingredient</Button>
         <Button
           block
-          bsSize="large"
-          text=""
+          bsSize='large'
+          text=''
           onClick={this.newIngredient()}
         >New Ingredient</Button>
         <LoaderButton
           isLoading={this.state.loading}
           loadingText='Submitting...'
           block
-          bsSize="large"
+          bsSize='large'
           disabled={!this.validateForm()}
-          type="submit"
-          text="Create Recipe"
+          type='submit'
+          text='Create Recipe'
         ></LoaderButton>
       </form>
     );
   }
 
   render() {
-    console.log(this.state)
     return (
-      <div className="Signup">
+      <div className='Signup'>
         {this.renderForm()}
       </div>
     );

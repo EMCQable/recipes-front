@@ -1,12 +1,15 @@
 import React from 'react'
 import HelpThingy from './HelpThingy'
 import { Navbar } from 'react-bootstrap'
+import './Footer.css'
 
 const Footer = () => {
   return (
-    <Navbar>
-      <HelpThingy />
-    </ Navbar>
+    <div className='footer'>
+      <Navbar>
+        <HelpThingy />
+      </ Navbar>
+    </div>
   )
 }
 

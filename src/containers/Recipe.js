@@ -16,7 +16,7 @@ class Recipe extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     try {
       let recipe = await this.getRecipe();
       recipe = recipe.Items

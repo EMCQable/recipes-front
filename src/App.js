@@ -49,8 +49,8 @@ class App extends Component {
       //let recipes = await this.getRecipes()
       //const user = await userService.getUser('1')
       //this.setState({
-        //recipes,
-        //user
+      //recipes,
+      //user
       //});
     } catch (e) {
       alert(e);
@@ -62,17 +62,11 @@ class App extends Component {
   }
 
   render() {
-    const childProps = {
-      isAuthenticated: this.props.isAuthenticated,
-      //recipes: this.state.recipes,
-      userHasAuthenticated: this.userHasAuthenticated,
-      user: this.state.user
-    };
     return (
       !this.props.isAuthenticating &&
       <div className="App">
         <NavBar />
-        <Routes childProps={childProps} />
+        <Routes />
         <Footer />
       </div>
     );

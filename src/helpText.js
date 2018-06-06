@@ -6,4 +6,4 @@ export default {
   recipes: 'Recipe information. When logged in, use the datepicker to add a date to cook this recipe.',
   signup: 'Standard signup page.',
   login: 'Standard login page.'
-};
+}

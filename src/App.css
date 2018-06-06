@@ -1,3 +1,19 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+.App {
+  margin-bottom: 100px;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  height: 100px;
+}
+
 .App {
   text-align: center;
 }

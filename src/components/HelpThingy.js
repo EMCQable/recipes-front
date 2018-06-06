@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
 import { Button, Overlay } from 'react-bootstrap'
 import helpText from '../helpText'
 
-function CustomPopover({ style, location }) {
+const CustomPopover = ({ style, location }) => {
 
   return (
     <div
@@ -18,11 +18,11 @@ function CustomPopover({ style, location }) {
     >
       <strong>{getText(location)}</strong>
     </div>
-  );
+  )
 }
 
 const getText = (location) => {
-  if (location === ''){
+  if (helpText[location] === '') {
     return 'Welcome to Pihkaniitty!'
   }
   return helpText[location]
@@ -30,30 +30,30 @@ const getText = (location) => {
 
 class HelpThingy extends React.Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
     this.handleToggle = this.handleToggle.bind(this);
 
     this.state = {
       show: false
-    };
+    }
   }
 
   handleToggle() {
-    this.setState({ show: !this.state.show });
+    this.setState({ show: !this.state.show })
   }
 
   render() {
-    const location = window.location.pathname.split( '/' )[1]
+    const location = window.location.pathname.split('/')[1]
     return (
-      <div style={{
-        height: 100,
-        position: 'relative',
-        margin: 'auto'
-      }} >
+      <div
+        style={{
+          height: 100,
+          margin: 'auto'
+        }} >
         <Button
           ref={button => {
-            this.target = button;
+            this.target = button
           }}
           onClick={this.handleToggle}
         >
@@ -67,10 +67,10 @@ class HelpThingy extends React.Component {
           container={this}
           target={() => ReactDOM.findDOMNode(this.target)}
         >
-          <CustomPopover location={location}/>
+          <CustomPopover location={location} />
         </Overlay>
       </div>
-    );
+    )
   }
 }
 
