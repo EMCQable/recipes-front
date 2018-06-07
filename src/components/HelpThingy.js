@@ -22,7 +22,7 @@ const CustomPopover = ({ style, location }) => {
 }
 
 const getText = (location) => {
-  if (helpText[location] === '') {
+  if (helpText[location] === undefined) {
     return 'Welcome to Pihkaniitty!'
   }
   return helpText[location]

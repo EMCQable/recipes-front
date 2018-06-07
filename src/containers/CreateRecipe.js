@@ -57,7 +57,7 @@ class CreateRecipe extends Component {
   }
 
   handleSubmit = async event => {
-    event.preventDefault();
+    event.preventDefault()
     this.setState({
       loading: true
     });
@@ -76,8 +76,6 @@ class CreateRecipe extends Component {
       servings: this.state.servings.toString()
     }
 
-    console.log(Item)
-
     //const newly = await RecipeService.create(Item)
     //this.props.recipes.Items.push(newly)
     await this.props.addRecipe(Item)
@@ -90,7 +88,7 @@ class CreateRecipe extends Component {
   }
 
   removeIngredient = () => () => {
-    if (this.state.ingredients > 0) {
+    if (this.state.ingredients > 1) {
       this.setState({
         ingredients: (this.state.ingredients - 1)
       })

@@ -28,11 +28,11 @@ const update = async (id, newObject) => {
   let myInit = { // OPTIONAL
     body: {
       Item: {
-        newObject
+        ...newObject
       }
     }, // replace this with attributes you need
   }
-  return await API.post(apiName, path, myInit)
+  return await API.put(apiName, path, myInit)
 }
 
 export default { getUser, create, update }

@@ -24,7 +24,9 @@ const scheduleReducer = (state = initState, action) => {
     case 'NEW_COOK':
       return { ...state, schedule: [...state.schedule, action.data] }
     case 'CHANGE_SETTINGS':
-      return { ...state, settings: { servingsPerDay: action.servings } }
+      console.log(state)
+      console.log(action)
+      return { ...state, settings: { servingsPerDay: action.data } }
     case 'INIT_SCHEDULE':
       return { ...action.data, ready: true }
     default:
@@ -55,10 +57,11 @@ export const addCook = (content) => {
 
 export const changeDailyServings = (content) => {
   return async (dispatch) => {
-    const servings = await userService.update(content)
+    const settings = { settings: { servingsPerDay: content } }
+    const servings = await userService.update('1', settings)
     dispatch({
       type: 'CHANGE_SETTINGS',
-      servings
+      data: content
     })
   }
 }

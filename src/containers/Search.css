@@ -3,3 +3,8 @@ ul {
   margin: 0;
   padding: 0;
 }
+@media only screen and (min-width: 660px){
+  ul.recipeCards {
+    columns: 3;
+  }
+}

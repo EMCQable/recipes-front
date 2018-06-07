@@ -1,15 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
+import RecipeCard from '../components/RecipeCard'
 import './Search.css'
 import { connect } from 'react-redux'
 
 const showRecipes = ({ recipes }) => {
   return (
     <div>
-      <ul>
+      <ul className='recipeCards'>
         {recipes.Items.map(element => {
-          const link = `recipes/${element.id}`
-          return <li key={element.id} ><Link to={link} > {element.name}</Link></li>
+          //return <li key={element.id} ><Link to={link} > {element.name}</Link></li>
+          return <RecipeCard key={element.id} id={element.id} name={element.name} />
         })}
       </ul>
     </div>
