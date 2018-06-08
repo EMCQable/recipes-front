@@ -6,12 +6,12 @@ import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
 
 class User extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       editing: false,
       servings: Number(this.props.servingsPerDay)
-    };
+    }
   }
 
   handleSubmit = async (event) => {
@@ -26,13 +26,13 @@ class User extends Component {
       Number.isInteger(this.state.servings) &&
       this.state.servings > 0 &&
       this.state.servings < 11
-    );
+    )
   }
 
   handleServingsChange = event => {
     this.setState({
       servings: Number(event.target.value)
-    });
+    })
   }
 
   validateServings() {

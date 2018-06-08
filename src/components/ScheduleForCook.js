@@ -2,24 +2,24 @@ import DatePicker from 'react-16-bootstrap-date-picker'
 import React from 'react'
 import { API } from 'aws-amplify'
 import { FormGroup, ControlLabel, HelpBlock, Button } from 'react-bootstrap'
-import {connect } from 'react-redux'
+import { connect } from 'react-redux'
 import './ScheduleForCook.css'
 
 class ScheduleForCook extends React.Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
     // Initial state with date
     this.state = {
       selectedDate: new Date().toISOString(),
       formattedValue: new Date().toISOString().slice(0, 10)
-    };
+    }
 
     // This binding is necessary to make `this` work in the callback
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this)
   }
 
-  onChange(value, formattedValue) {
+  onChange(value) {
     let newValue = value
     if (value) {
       newValue = value.slice(0, 10)
@@ -27,7 +27,7 @@ class ScheduleForCook extends React.Component {
     this.setState({
       selectedDate: value, // ISO String, ex: '2016-11-19T12:00:00.000Z'
       formattedValue: newValue // Formatted String, ex: '11/19/2016'
-    });
+    })
   }
 
   componentDidUpdate() {
@@ -77,7 +77,7 @@ class ScheduleForCook extends React.Component {
           </FormGroup>
         </form >
       </div >
-    );
+    )
   }
 }
 

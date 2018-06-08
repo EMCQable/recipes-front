@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
-import FullCalendar from 'fullcalendar-reactwrapper';
+import React, { Component } from 'react'
+import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css'
+import FullCalendar from 'fullcalendar-reactwrapper'
 import './Planner.css'
 import { advanceDate, formatDate } from '../utils/dateUtils'
 import { connect } from 'react-redux'
@@ -10,12 +10,12 @@ import { initSchedule } from '../reducers/scheduleReducer'
 
 class Planner extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       events: [
         {
           title: 'All Day Event',
-          start: "2018-05-01"
+          start: '2018-05-01'
         },
       ],
     }
@@ -38,22 +38,21 @@ class Planner extends Component {
     const defaultDate = formatDate(today.getFullYear(), today.getMonth() + 1, today.getDate())
 
     return (
-      <div className="calendar" id="example-component">
+      <div className='calendar' id='example-component'>
         <FullCalendar
-          id="your-custom-ID"
+          id='your-custom-ID'
           header={{
             left: 'prev,next today myCustomButton',
             center: 'title',
-            right: 'month,basicWeek,basicDay'
           }}
           defaultDate={defaultDate}
           navLinks={true} // can click day/week names to navigate views
           editable={true}
-          eventLimit={true} // allow "more" link when too many events
+          eventLimit={true} // allow 'more' link when too many events
           events={this.props.schedule}
         />
       </div>
-    );
+    )
   }
 }
 

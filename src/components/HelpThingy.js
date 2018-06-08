@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+//import ReactDOM from 'react-dom'
 import { Button, Overlay } from 'react-bootstrap'
 import helpText from '../helpText'
 
@@ -32,7 +32,7 @@ class HelpThingy extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleToggle = this.handleToggle.bind(this)
 
     this.state = {
       show: false
@@ -65,7 +65,7 @@ class HelpThingy extends React.Component {
           onHide={() => this.setState({ show: false })}
           placement='top'
           container={this}
-          target={() => ReactDOM.findDOMNode(this.target)}
+          //target={() => ReactDOM.findDOMNode(this.target)}
         >
           <CustomPopover location={location} />
         </Overlay>

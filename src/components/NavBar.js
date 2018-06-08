@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import { logout } from '../reducers/userReducer'
 
 const NavBar = (props) => {
-  const handleLogout = async event => {
+  const handleLogout = async () => {
     props.logout()
-    props.history.push('/');
+    props.history.push('/')
   }
   return (
     <Navbar>

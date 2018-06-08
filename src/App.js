@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
-import NavBar from './components/NavBar';
-import Routes from "./Routes";
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import Routes from './Routes'
 import Footer from './components/Footer'
 import RecipeService from './services/Recipes'
 import { connect } from 'react-redux'
 import { checkSession } from './reducers/userReducer'
 import { initRecipes } from './reducers/recipeReducer'
-import './App.css';
+import './App.css'
 
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.file = null;
+    this.file = null
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
@@ -35,11 +35,11 @@ class App extends Component {
         }
         ]
       }
-    };
+    }
   }
 
   userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
+    this.setState({ isAuthenticated: authenticated })
   }
 
   async componentDidMount() {
@@ -51,9 +51,9 @@ class App extends Component {
       //this.setState({
       //recipes,
       //user
-      //});
+      //})
     } catch (e) {
-      alert(e);
+      alert(e)
     }
   }
 
@@ -64,12 +64,12 @@ class App extends Component {
   render() {
     return (
       !this.props.isAuthenticating &&
-      <div className="App">
+      <div className='App'>
         <NavBar />
         <Routes />
         <Footer />
       </div>
-    );
+    )
   }
 }
 

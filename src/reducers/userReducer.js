@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify'
 import userService from '../services/Users'
 import { initSchedule } from './scheduleReducer'
 
@@ -11,24 +11,24 @@ const initState = {
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return {
-        isAuthenticated: true,
-        isAuthenticating: false
-      }
-    case 'LOGOUT':
-      return {
-        isAuthenticated: false,
-        isAuthenticating: false
-      }
-    default:
-      return state
+  case 'LOGIN':
+    return {
+      isAuthenticated: true,
+      isAuthenticating: false
+    }
+  case 'LOGOUT':
+    return {
+      isAuthenticated: false,
+      isAuthenticating: false
+    }
+  default:
+    return state
   }
 }
 
 
 export const createUser = (username, password, email) => {
-  return async (dispatch) => {
+  return async () => {
     await Auth.signUp({
       username,
       password,
@@ -55,7 +55,7 @@ export const checkSession = () => {
       })
 
       if (e !== 'No current user') {
-        alert(e);
+        alert(e)
       }
     }
   }
@@ -63,10 +63,10 @@ export const checkSession = () => {
 
 export const confirmUser = (username, password) => {
   return async (dispatch) => {
-    await Auth.signIn(username, password);
+    await Auth.signIn(username, password)
     //const day = new Date()
 
-    /*await API.post("users", "/", {
+    /*await API.post('users', '/', {
       body:
         {
           Item:
@@ -86,7 +86,7 @@ export const confirmUser = (username, password) => {
 
 export const login = (username, password) => {
   return async (dispatch) => {
-    await Auth.signIn(username, password);
+    await Auth.signIn(username, password)
     dispatch(initSchedule())
     dispatch({
       type: 'LOGIN',
@@ -94,9 +94,9 @@ export const login = (username, password) => {
   }
 }
 
-export const logout = (content) => {
+export const logout = () => {
   return async (dispatch) => {
-    await Auth.signOut();
+    await Auth.signOut()
     dispatch({
       type: 'LOGOUT'
     })

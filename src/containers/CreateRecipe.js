@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import './CreateRecipe.css';
+import React, { Component } from 'react'
+import './CreateRecipe.css'
 import {
   FormGroup,
   FormControl,
   ControlLabel,
   Button
-} from 'react-bootstrap';
+} from 'react-bootstrap'
 import LoaderButton from '../components/LoaderButton'
 import { connect } from 'react-redux'
 import { addRecipe } from '../reducers/recipeReducer'
 
 class CreateRecipe extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       name: '',
@@ -21,7 +21,7 @@ class CreateRecipe extends Component {
       ingredient2: '',
       servings: 4,
       loading: false
-    };
+    }
   }
 
   componentDidMount() {
@@ -41,26 +41,26 @@ class CreateRecipe extends Component {
       Number.isInteger(this.state.servings) &&
       this.state.servings > 0 &&
       this.state.servings < 11
-    );
+    )
   }
 
-  handleChange = event => {
+  handleChange(event){
     this.setState({
       [event.target.id]: event.target.value,
-    });
+    })
   }
 
-  handleServingsChange = event => {
+  handleServingsChange(event){
     this.setState({
       servings: Number(event.target.value)
-    });
+    })
   }
 
-  handleSubmit = async event => {
+  async handleSubmit(event){
     event.preventDefault()
     this.setState({
       loading: true
-    });
+    })
     let ingredients = []
     for (let i = 1; i <= this.state.ingredients; i++) {
       const ingredient = `ingredient${i}`
@@ -84,7 +84,7 @@ class CreateRecipe extends Component {
       name: '',
       servings: 4,
       loading: false
-    });
+    })
   }
 
   removeIngredient = () => () => {
@@ -181,7 +181,7 @@ class CreateRecipe extends Component {
           text='Create Recipe'
         ></LoaderButton>
       </form>
-    );
+    )
   }
 
   render() {
@@ -189,7 +189,7 @@ class CreateRecipe extends Component {
       <div className='Signup'>
         {this.renderForm()}
       </div>
-    );
+    )
   }
 }
 

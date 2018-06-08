@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react'
 
-export default () =>
-  <div className="NotFound">
+const NotFound = () =>
+  <div className='NotFound'>
     <h3>Sorry, page not found!</h3>
-  </div>;
+  </div>
+
+export default NotFound

@@ -21,16 +21,16 @@ const initState =
 
 const scheduleReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'NEW_COOK':
-      return { ...state, schedule: [...state.schedule, action.data] }
-    case 'CHANGE_SETTINGS':
-      console.log(state)
-      console.log(action)
-      return { ...state, settings: { servingsPerDay: action.data } }
-    case 'INIT_SCHEDULE':
-      return { ...action.data, ready: true }
-    default:
-      return state
+  case 'NEW_COOK':
+    return { ...state, schedule: [...state.schedule, action.data] }
+  case 'CHANGE_SETTINGS':
+    console.log(state)
+    console.log(action)
+    return { ...state, settings: { servingsPerDay: action.data } }
+  case 'INIT_SCHEDULE':
+    return { ...action.data, ready: true }
+  default:
+    return state
   }
 }
 
@@ -58,7 +58,7 @@ export const addCook = (content) => {
 export const changeDailyServings = (content) => {
   return async (dispatch) => {
     const settings = { settings: { servingsPerDay: content } }
-    const servings = await userService.update('1', settings)
+    /*const servings = */await userService.update('1', settings)
     dispatch({
       type: 'CHANGE_SETTINGS',
       data: content

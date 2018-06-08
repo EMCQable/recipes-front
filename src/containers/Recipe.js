@@ -1,33 +1,33 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import RecipeService from '../services/Recipes'
-import { Glyphicon } from "react-bootstrap"
+import { Glyphicon } from 'react-bootstrap'
 import ScheduleForCook from '../components/ScheduleForCook'
 import { connect } from 'react-redux'
-import "./Recipe.css";
+import './Recipe.css'
 
 class Recipe extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
 
     this.state = {
       recipe: {},
       loaded: false
-    };
+    }
   }
 
   componentDidMount = async () => {
     try {
-      let recipe = await this.getRecipe();
+      let recipe = await this.getRecipe()
       recipe = recipe.Items
       recipe = recipe[0]
 
       this.setState({
         recipe,
         loaded: true
-      });
+      })
     } catch (e) {
-      alert(e);
+      alert(e)
     }
   }
 
@@ -37,10 +37,10 @@ class Recipe extends Component {
 
   showRecipe() {
     if (!this.state.loaded) {
-      return <Glyphicon glyph="refresh" className="spinning" />
+      return <Glyphicon glyph='refresh' className='spinning' />
     }
     if (!this.state.recipe) {
-      return <h1>There doesn't appear to be a recipe in here.</h1>
+      return (<h1>There does not appear to be a recipe in here.</h1>)
     }
     const recipe = this.state.recipe
     return (
@@ -56,12 +56,12 @@ class Recipe extends Component {
 
   render() {
     return (
-      <div className="Home">
-        <div className="lander">
+      <div className='Home'>
+        <div className='lander'>
           {this.showRecipe()}
         </div>
       </div>
-    );
+    )
   }
 }
 
