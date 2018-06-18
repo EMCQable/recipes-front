@@ -44,19 +44,19 @@ class CreateRecipe extends Component {
     )
   }
 
-  handleChange(event){
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value,
     })
   }
 
-  handleServingsChange(event){
+  handleServingsChange = event => {
     this.setState({
       servings: Number(event.target.value)
     })
   }
 
-  async handleSubmit(event){
+  handleSubmit = async event => {
     event.preventDefault()
     this.setState({
       loading: true

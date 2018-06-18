@@ -42,11 +42,12 @@ class Planner extends Component {
         <FullCalendar
           id='your-custom-ID'
           header={{
-            left: 'prev,next today myCustomButton',
+            left: 'prev today',
+            right: 'next',
             center: 'title',
           }}
           defaultDate={defaultDate}
-          navLinks={true} // can click day/week names to navigate views
+          //navLinks={true} // can click day/week names to navigate views
           editable={true}
           eventLimit={true} // allow 'more' link when too many events
           events={this.props.schedule}

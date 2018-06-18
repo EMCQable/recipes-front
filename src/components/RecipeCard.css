@@ -15,6 +15,11 @@
 }
 }
 
+@media only screen and (max-width: 660px){
+  .recipe-card {
+    margin-bottom: 10px;
+  }
+}
 .recipe-card .recipe-card-link {
   /*display: inline-block;
   -webkit-box-orient: vertical;
@@ -44,6 +49,7 @@ li {
 
 .recipe-card-overview {
   width: 100%;
+  background-color: whitesmoke;
 }
 
 .recipe-card-overview {
@@ -60,7 +66,6 @@ li {
   flex-wrap: wrap;
   font-size: 18px;
   padding: 15px 10px 10px;
-  width: 65%;
   margin: auto;
 }
 

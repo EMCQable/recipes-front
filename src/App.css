@@ -7,6 +7,24 @@ html {
   margin-bottom: 100px;
 }
 
+.App, html {
+  background-image: url('https://suwalls.com/wallpapers/photography/cookies-11312-2560x1600.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 30% 40%; 
+  background-size: cover;
+}
+
+@font-face {
+  font-family: Alcubierre;
+  src: url(https://s3.eu-west-2.amazonaws.com/pihkaniitty-pics-fonts-etc/Alcubierre.woff);
+}
+
+body {
+  color: snow;
+  font-family: Alcubierre, Helvetica, Arial, sans-serif;
+}
+
 .footer {
   bottom: 0;
   width: 100%;

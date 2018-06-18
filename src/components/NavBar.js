@@ -11,28 +11,38 @@ const NavBar = (props) => {
     props.history.push('/')
   }
   return (
-    <Navbar>
+    <Navbar collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
           <Link to='/'>Home</Link>
         </Navbar.Brand>
+        <Navbar.Toggle />
       </Navbar.Header>
-      <Nav pullRight>
-        <LinkContainer to='/search' ><NavItem>Find a Recipe</NavItem></LinkContainer>
-        <LinkContainer to='/create' ><NavItem>Create a new Recipe</NavItem></LinkContainer>
+      <Navbar.Collapse>
+        <Nav>
+          <LinkContainer to='/search' ><NavItem>Find a Recipe</NavItem></LinkContainer>
+          <LinkContainer to='/create' ><NavItem>Create a new Recipe</NavItem></LinkContainer>
+        </Nav>
         {props.isAuthenticated
           ? <Fragment>
-            <LinkContainer to='/plan' ><NavItem>Plan your meals</NavItem></LinkContainer>
-            <LinkContainer to='/settings' ><NavItem>Preferences</NavItem></LinkContainer>
-            <NavItem onClick={handleLogout}>Logout</NavItem>
+            <Nav>
+              <LinkContainer to='/plan' ><NavItem>Plan your meals</NavItem></LinkContainer>
+            </Nav>
+            <Nav pullRight>
+              <LinkContainer to='/settings' ><NavItem>Preferences</NavItem></LinkContainer>
+              <NavItem onClick={handleLogout}>Logout</NavItem>
+            </Nav>
           </Fragment>
           : <Fragment>
-            <LinkContainer to='/signup' ><NavItem>Signup</NavItem></LinkContainer>
-            <LinkContainer to='/login' ><NavItem>Login</NavItem></LinkContainer>
+            <Nav pullRight>
+              <LinkContainer to='/signup' ><NavItem>Signup</NavItem></LinkContainer>
+              <LinkContainer to='/login' ><NavItem>Login</NavItem></LinkContainer>
+            </Nav>
           </Fragment>
         }
-      </Nav>
-    </Navbar>
+
+      </Navbar.Collapse>
+    </Navbar >
   )
 }
 
