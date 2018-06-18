@@ -6,17 +6,7 @@ import Amplify from 'aws-amplify'
 import config from './config'
 import store from './store'
 import { Provider } from 'react-redux'
-//import WebFont from 'webfontloader'
-
 import { BrowserRouter as Router } from 'react-router-dom'
-
-/*WebFont.load({
-  custom: {
-    families: ['Alcubierre', 'Habel'],
-    urls: ['https://s3.eu-west-2.amazonaws.com/pihkaniitty-pics-fonts-etc/fonts.css']
-  }
-})*/
-
 
 Amplify.configure({
   Auth: {
@@ -46,7 +36,6 @@ Amplify.configure({
     ]
   }
 })
-
 
 ReactDOM.render(
   <Provider store={store}>

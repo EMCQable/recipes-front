@@ -16,4 +16,6 @@ const store = createStore(
   applyMiddleware(thunk)
 )
 
+window.appStore = store
+
 export default store

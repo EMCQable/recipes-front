@@ -1,13 +1,13 @@
 import RecipeService from '../services/Recipes2'
 
-const recipeReducer = (state = { Items: [] }, action) => {
+const recipeReducer = (state = { Items: [], isFetching: false }, action) => {
   switch (action.type) {
-    case 'NEW_RECIPE':
-      return { Items: [...state.Items, action.data] }
-    case 'INIT_RECIPES':
-      return action.data
-    default:
-      return state
+  case 'NEW_RECIPE':
+    return { Items: [...state.Items, action.data] }
+  case 'INIT_RECIPES':
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -21,6 +21,7 @@ export const initRecipes = () => {
         data: recipes
       })
     } catch (e) {
+      console.log(e)
     }
   }
 }
